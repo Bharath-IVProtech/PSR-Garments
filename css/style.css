@@ -93,6 +93,8 @@ svg { width: 1em; height: 1em; fill: currentColor; flex-shrink: 0; }
 }
 .topbar__phone { margin-left: auto; color: #fff; display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; }
 .topbar__phone:hover { color: var(--gold); }
+.topbar__email { color: #fff; display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; }
+.topbar__email:hover { color: var(--gold); }
 
 /* ---------- Header ---------- */
 .header {
@@ -341,6 +343,7 @@ svg { width: 1em; height: 1em; fill: currentColor; flex-shrink: 0; }
 .contact-card h3 { font-family: var(--font-body); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .3rem; }
 .contact-card p, .contact-card address { margin: 0; font-weight: 500; color: var(--ink); }
 .contact-card a { font-size: 1.15rem; font-weight: 700; }
+.contact-card a.contact-card__email { font-size: 1rem; word-break: break-all; }
 .contact-card__icon {
   display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
   background: var(--maroon); color: #fff; font-size: 1.2rem; flex-shrink: 0;
@@ -410,7 +413,7 @@ svg { width: 1em; height: 1em; fill: currentColor; flex-shrink: 0; }
 
 @media (max-width: 640px) {
   :root { --header-h: 66px; }
-  .topbar__text { display: none; }
+  .topbar__text, .topbar__email { display: none; }
   .brand__mark { width: 42px; height: 42px; font-size: .8rem; }
   .brand__text strong { font-size: 1.2rem; }
   .brand__text small { font-size: .68rem; }

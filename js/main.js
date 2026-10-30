@@ -3,7 +3,7 @@
   'use strict';
 
   // WhatsApp number that receives enquiries (country code + number, digits only)
-  var WHATSAPP_NUMBER = '919441110000';
+  var WHATSAPP_NUMBER = '919490000123';
 
   var header = document.getElementById('header');
   var nav = document.getElementById('nav');
