@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PSR Garments | Ladies' Inskirt &amp; Nightwear Manufacturer – Hindupur, Andhra Pradesh</title>
   <meta name="description" content="PSR Garments, Kirikera, Hindupur – direct manufacturer and wholesale supplier of quality ladies' inskirts and nightwear. Wholesale only. Bulk orders welcome. Call 94900 00123.">
-  <meta name="keywords" content="ladies inskirt manufacturer, nightwear manufacturer, inskirt wholesale, nighty wholesale, garment manufacturer Hindupur, Kirikera garments, petticoat manufacturer Andhra Pradesh, PSR Garments">
+  <meta name="keywords" content="ladies inskirt manufacturer, nightwear manufacturer, inskirt wholesale, nighty wholesale, garment manufacturer Hindupur, Kirikera garments, petticoat manufacturer Andhra Pradesh, kurti wholesale, nightwear wholesale India, PSR Garments">
   <meta name="author" content="PSR Garments">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#1f2a44">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="PSR Garments – Ladies' Inskirt &amp; Nightwear Manufacturer">
   <meta property="og:description" content="Direct manufacturer &amp; wholesale supplier of ladies' inskirts and nightwear. Kirikera, Hindupur, Andhra Pradesh. Wholesale only.">
-  <meta property="og:image" content="images/og-image.svg">
+  <meta property="og:image" content="images/about/psr-garments-fabric-colour-range.jpg">
 
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,9 @@
     "areaServed": "IN",
     "makesOffer": [
       { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Ladies' Inskirts" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Ladies' Nightwear" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Ladies' Nightwear" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Ladies' Kurtis" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Ethnic Gowns and Anarkalis" } }
     ]
   }
   </script>
@@ -87,6 +89,7 @@
         <a href="#home" class="nav__link">Home</a>
         <a href="#about" class="nav__link">About Us</a>
         <a href="#products" class="nav__link">Products</a>
+        <a href="#gallery" class="nav__link">Gallery</a>
         <a href="#why-us" class="nav__link">Why Us</a>
         <a href="#wholesale" class="nav__link">Wholesale</a>
         <a href="#contact" class="nav__link">Contact</a>
@@ -155,10 +158,9 @@
     <section class="section" id="about">
       <div class="container about">
         <div class="about__media">
-          <!-- To use a real photo of your unit, replace this block with:
-               <img src="images/factory.jpg" alt="PSR Garments manufacturing unit" loading="lazy"> -->
-          <div class="media-placeholder media-placeholder--about">
-            <img src="images/about-unit.svg" alt="Illustration of PSR Garments manufacturing unit" loading="lazy" width="560" height="440">
+          <!-- To change this photo, replace the file in images/about/ (a portrait photo, about 3:4, works best). -->
+          <div class="media-frame">
+            <img src="images/about/psr-garments-fabric-colour-range.jpg" alt="Wide range of fabric colours stocked at PSR Garments" loading="lazy" width="736" height="981">
           </div>
           <div class="about__badge">
             <strong>Kirikera, Hindupur</strong>
@@ -173,7 +175,7 @@
             <strong>PSR Garments</strong> is a garment manufacturing business located on the
             Hindupur–Gowribidanur Main Road in Kirikera, Hindupur, Andhra Pradesh. We specialise in
             the manufacture of <strong>ladies' inskirts and nightwear</strong>, produced in-house and
-            supplied directly to the trade.
+            supplied directly to the trade. Our range also includes ladies' kurtis and ethnic wear.
           </p>
           <p>
             Led by proprietor <strong>S. Ganesh</strong>, our focus is simple: well-finished garments,
@@ -231,8 +233,8 @@
             ================= HOW TO ADD / EDIT A PRODUCT =================
             1. Copy one whole <article class="product"> ... </article> block.
             2. Paste it below the last product.
-            3. Put your photo in the "images/products/" folder and change the
-               <img src="..."> path and alt text.
+            3. Put your photo in the matching "images/products/<category>/" folder
+               and change the <img src="..."> path and alt text.
             4. Update the title, description and specification rows.
             =================================================================
           -->
@@ -240,7 +242,7 @@
           <!-- PRODUCT: Ladies' Inskirts -->
           <article class="product">
             <div class="product__media">
-              <img src="images/products/inskirt.svg" alt="Ladies' inskirt manufactured by PSR Garments" loading="lazy" width="600" height="450">
+              <img src="images/products/inskirts/inskirt-sage-green-frill-hem.jpg" alt="Sage green ladies' inskirt with frill hem by PSR Garments" loading="lazy" width="569" height="879">
               <span class="product__label">Wholesale</span>
             </div>
             <div class="product__body">
@@ -256,21 +258,24 @@
                 <div><dt>Packing</dt><dd>Bulk packing as per buyer requirement</dd></div>
                 <div><dt>Supply</dt><dd>Wholesale / bulk quantities only</dd></div>
               </dl>
-              <a href="#wholesale" class="btn btn--outline btn--block" data-product="Ladies' Inskirts">Enquire for Bulk Order</a>
+              <div class="product__actions">
+                <a href="#wholesale" class="btn btn--outline btn--block" data-product="Ladies' Inskirts">Enquire for Bulk Order</a>
+                <a href="#gallery" class="product__link" data-filter="inskirts">View designs &rarr;</a>
+              </div>
             </div>
           </article>
 
           <!-- PRODUCT: Ladies' Nightwear -->
           <article class="product">
             <div class="product__media">
-              <img src="images/products/nightwear.svg" alt="Ladies' nightwear manufactured by PSR Garments" loading="lazy" width="600" height="450">
+              <img src="images/products/nightwear/nighty-mustard-printed-cotton.jpg" alt="Mustard printed cotton ladies' nighty by PSR Garments" loading="lazy" width="667" height="1000">
               <span class="product__label">Wholesale</span>
             </div>
             <div class="product__body">
               <h3 class="product__title">Ladies' Nightwear</h3>
               <p class="product__desc">
-                Soft, breathable ladies' nightwear designed for comfort and lasting wear. Available in a
-                variety of prints and styles suited to wholesale and retail-trade buyers.
+                Soft, breathable nighties and kaftan-style maxis designed for comfort and lasting wear.
+                Available in a variety of prints suited to wholesale and retail-trade buyers.
               </p>
               <dl class="specs">
                 <div><dt>Fabric</dt><dd>Cotton / printed fabrics (as per order)</dd></div>
@@ -279,25 +284,229 @@
                 <div><dt>Packing</dt><dd>Bulk packing as per buyer requirement</dd></div>
                 <div><dt>Supply</dt><dd>Wholesale / bulk quantities only</dd></div>
               </dl>
-              <a href="#wholesale" class="btn btn--outline btn--block" data-product="Ladies' Nightwear">Enquire for Bulk Order</a>
+              <div class="product__actions">
+                <a href="#wholesale" class="btn btn--outline btn--block" data-product="Ladies' Nightwear">Enquire for Bulk Order</a>
+                <a href="#gallery" class="product__link" data-filter="nightwear">View designs &rarr;</a>
+              </div>
             </div>
           </article>
 
-          <!-- PLACEHOLDER: more products (delete this block once real products are added) -->
-          <article class="product product--more">
-            <div class="product__more">
-              <span class="product__more-icon" aria-hidden="true">+</span>
-              <h3 class="product__title">Other Ladies' Garments</h3>
+          <!-- PRODUCT: Ladies' Kurtis -->
+          <article class="product">
+            <div class="product__media">
+              <img src="images/products/kurtis/kurti-black-red-embroidered-yoke.jpg" alt="Black ladies' kurti with red embroidered yoke by PSR Garments" loading="lazy" width="736" height="981">
+              <span class="product__label">Wholesale</span>
+            </div>
+            <div class="product__body">
+              <h3 class="product__title">Ladies' Kurtis</h3>
               <p class="product__desc">
-                Looking for other ladies' garment products or a custom specification?
-                Share your requirement and we will check feasibility for bulk manufacturing.
+                Everyday and festive kurtis with printed panels, Ajrakh-style prints and embroidered yoke
+                designs, made in bulk for wholesalers, boutiques and retailers.
               </p>
-              <a href="#wholesale" class="btn btn--primary" data-product="Other ladies' garments">Share Your Requirement</a>
+              <dl class="specs">
+                <div><dt>Fabric</dt><dd>Cotton / printed fabrics (as per order)</dd></div>
+                <div><dt>Sizes</dt><dd>M, L, XL, XXL; custom on request</dd></div>
+                <div><dt>Designs</dt><dd>Multiple prints &amp; yoke patterns</dd></div>
+                <div><dt>Packing</dt><dd>Bulk packing as per buyer requirement</dd></div>
+                <div><dt>Supply</dt><dd>Wholesale / bulk quantities only</dd></div>
+              </dl>
+              <div class="product__actions">
+                <a href="#wholesale" class="btn btn--outline btn--block" data-product="Ladies' Kurtis">Enquire for Bulk Order</a>
+                <a href="#gallery" class="product__link" data-filter="kurtis">View designs &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PRODUCT: Ethnic Gowns & Anarkalis -->
+          <article class="product">
+            <div class="product__media">
+              <img src="images/products/ethnic-wear/long-jacket-kurta-green-embroidered.jpg" alt="Green embroidered long jacket-style kurta by PSR Garments" loading="lazy" width="562" height="1000">
+              <span class="product__label">Wholesale</span>
+            </div>
+            <div class="product__body">
+              <h3 class="product__title">Ethnic Gowns &amp; Anarkalis</h3>
+              <p class="product__desc">
+                Long gowns, anarkalis and jacket-style kurtas with embroidery and print work for festive
+                and occasion wear, produced to order in bulk.
+              </p>
+              <dl class="specs">
+                <div><dt>Fabric</dt><dd>As per design and order</dd></div>
+                <div><dt>Sizes</dt><dd>M, L, XL, XXL; custom on request</dd></div>
+                <div><dt>Designs</dt><dd>Assorted styles and colours</dd></div>
+                <div><dt>Packing</dt><dd>Bulk packing as per buyer requirement</dd></div>
+                <div><dt>Supply</dt><dd>Wholesale / bulk quantities only</dd></div>
+              </dl>
+              <div class="product__actions">
+                <a href="#wholesale" class="btn btn--outline btn--block" data-product="Ethnic Gowns &amp; Anarkalis">Enquire for Bulk Order</a>
+                <a href="#gallery" class="product__link" data-filter="ethnic">View designs &rarr;</a>
+              </div>
             </div>
           </article>
         </div>
+
+        <!-- Other / custom products -->
+        <div class="products-more">
+          <span class="product__more-icon" aria-hidden="true">+</span>
+          <div class="products-more__text">
+            <h3>Other Ladies' Garments &amp; Custom Specifications</h3>
+            <p>Need a different product, fabric or size set? Share your requirement and we will check feasibility for bulk manufacturing.</p>
+          </div>
+          <a href="#wholesale" class="btn btn--primary" data-product="Other ladies' garments">Share Your Requirement</a>
+        </div>
       </div>
     </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Our Collection</p>
+          <h2 class="section-title">Design Gallery</h2>
+          <p class="section-sub">
+            A selection of styles available for bulk orders. Tap any photo to view it larger,
+            and mention the design name in your enquiry.
+          </p>
+        </div>
+
+        <div class="gallery__filters" role="group" aria-label="Filter gallery by category">
+          <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-filter="inskirts" aria-pressed="false">Inskirts &amp; Skirts</button>
+          <button type="button" class="chip" data-filter="nightwear" aria-pressed="false">Nightwear</button>
+          <button type="button" class="chip" data-filter="kurtis" aria-pressed="false">Kurtis</button>
+          <button type="button" class="chip" data-filter="ethnic" aria-pressed="false">Ethnic Wear</button>
+        </div>
+
+        <!--
+          ================= HOW TO ADD A GALLERY PHOTO =================
+          Copy one <figure class="gallery__item"> block, change the image path
+          (in both href and src), the title, and data-category
+          (inskirts / nightwear / kurtis / ethnic).
+          ==============================================================
+        -->
+        <div class="gallery" id="galleryGrid">
+          <figure class="gallery__item" data-category="inskirts">
+            <a href="images/products/inskirts/inskirt-sage-green-frill-hem.jpg" class="gallery__link">
+              <img src="images/products/inskirts/inskirt-sage-green-frill-hem.jpg" alt="Sage Green Inskirt with Frill Hem by PSR Garments" loading="lazy" width="569" height="879">
+              <figcaption><strong>Sage Green Inskirt with Frill Hem</strong><span>Inskirts &amp; Skirts</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="inskirts">
+            <a href="images/products/inskirts/skirt-teal-satin-ruffle.jpg" class="gallery__link">
+              <img src="images/products/inskirts/skirt-teal-satin-ruffle.jpg" alt="Teal Satin Ruffle Skirt by PSR Garments" loading="lazy" width="562" height="1000">
+              <figcaption><strong>Teal Satin Ruffle Skirt</strong><span>Inskirts &amp; Skirts</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="nightwear">
+            <a href="images/products/nightwear/nighty-mustard-printed-cotton.jpg" class="gallery__link">
+              <img src="images/products/nightwear/nighty-mustard-printed-cotton.jpg" alt="Mustard Printed Cotton Nighty by PSR Garments" loading="lazy" width="667" height="1000">
+              <figcaption><strong>Mustard Printed Cotton Nighty</strong><span>Nightwear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="nightwear">
+            <a href="images/products/nightwear/nighty-maroon-floral-print.jpg" class="gallery__link">
+              <img src="images/products/nightwear/nighty-maroon-floral-print.jpg" alt="Maroon Floral Print Nighty by PSR Garments" loading="lazy" width="512" height="830">
+              <figcaption><strong>Maroon Floral Print Nighty</strong><span>Nightwear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="nightwear">
+            <a href="images/products/nightwear/kaftan-maxi-green-printed.jpg" class="gallery__link">
+              <img src="images/products/nightwear/kaftan-maxi-green-printed.jpg" alt="Green Printed Kaftan Maxi by PSR Garments" loading="lazy" width="750" height="1000">
+              <figcaption><strong>Green Printed Kaftan Maxi</strong><span>Nightwear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="nightwear">
+            <a href="images/products/nightwear/kaftan-maxi-pink-printed.jpg" class="gallery__link">
+              <img src="images/products/nightwear/kaftan-maxi-pink-printed.jpg" alt="Pink Printed Kaftan Maxi by PSR Garments" loading="lazy" width="750" height="1000">
+              <figcaption><strong>Pink Printed Kaftan Maxi</strong><span>Nightwear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="kurtis">
+            <a href="images/products/kurtis/kurti-black-red-embroidered-yoke.jpg" class="gallery__link">
+              <img src="images/products/kurtis/kurti-black-red-embroidered-yoke.jpg" alt="Black Kurti with Embroidered Yoke by PSR Garments" loading="lazy" width="736" height="981">
+              <figcaption><strong>Black Kurti with Embroidered Yoke</strong><span>Kurtis</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="kurtis">
+            <a href="images/products/kurtis/kurti-navy-ajrakh-print-panels.jpg" class="gallery__link">
+              <img src="images/products/kurtis/kurti-navy-ajrakh-print-panels.jpg" alt="Navy Kurti with Ajrakh Print Panels by PSR Garments" loading="lazy" width="667" height="934">
+              <figcaption><strong>Navy Kurti with Ajrakh Print Panels</strong><span>Kurtis</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="kurtis">
+            <a href="images/products/kurtis/kurti-black-ajrakh-print-yoke.jpg" class="gallery__link">
+              <img src="images/products/kurtis/kurti-black-ajrakh-print-yoke.jpg" alt="Black Ajrakh Print Kurti by PSR Garments" loading="lazy" width="736" height="902">
+              <figcaption><strong>Black Ajrakh Print Kurti</strong><span>Kurtis</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="kurtis">
+            <a href="images/products/kurtis/kurti-black-striped-yoke-tassels.jpg" class="gallery__link">
+              <img src="images/products/kurtis/kurti-black-striped-yoke-tassels.jpg" alt="Black Kurti with Striped Yoke &amp; Tassels by PSR Garments" loading="lazy" width="715" height="1000">
+              <figcaption><strong>Black Kurti with Striped Yoke &amp; Tassels</strong><span>Kurtis</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="kurtis">
+            <a href="images/products/kurtis/kurti-black-red-ajrakh-panel.jpg" class="gallery__link">
+              <img src="images/products/kurtis/kurti-black-red-ajrakh-panel.jpg" alt="Black &amp; Red Ajrakh Panel Kurti by PSR Garments" loading="lazy" width="736" height="981">
+              <figcaption><strong>Black &amp; Red Ajrakh Panel Kurti</strong><span>Kurtis</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="kurtis">
+            <a href="images/products/kurtis/kurti-maroon-embroidered-v-yoke.jpg" class="gallery__link">
+              <img src="images/products/kurtis/kurti-maroon-embroidered-v-yoke.jpg" alt="Maroon Kurti with Embroidered V-Yoke by PSR Garments" loading="lazy" width="736" height="920">
+              <figcaption><strong>Maroon Kurti with Embroidered V-Yoke</strong><span>Kurtis</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="ethnic">
+            <a href="images/products/ethnic-wear/long-jacket-kurta-green-embroidered.jpg" class="gallery__link">
+              <img src="images/products/ethnic-wear/long-jacket-kurta-green-embroidered.jpg" alt="Green Embroidered Long Jacket Kurta by PSR Garments" loading="lazy" width="562" height="1000">
+              <figcaption><strong>Green Embroidered Long Jacket Kurta</strong><span>Ethnic Wear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="ethnic">
+            <a href="images/products/ethnic-wear/anarkali-rust-mirror-work.jpg" class="gallery__link">
+              <img src="images/products/ethnic-wear/anarkali-rust-mirror-work.jpg" alt="Rust Anarkali with Mirror Work by PSR Garments" loading="lazy" width="563" height="1000">
+              <figcaption><strong>Rust Anarkali with Mirror Work</strong><span>Ethnic Wear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="ethnic">
+            <a href="images/products/ethnic-wear/gown-maroon-embroidered-cape.jpg" class="gallery__link">
+              <img src="images/products/ethnic-wear/gown-maroon-embroidered-cape.jpg" alt="Maroon Gown with Embroidered Cape by PSR Garments" loading="lazy" width="667" height="1000">
+              <figcaption><strong>Maroon Gown with Embroidered Cape</strong><span>Ethnic Wear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="ethnic">
+            <a href="images/products/ethnic-wear/anarkali-black-embroidered-jacket.jpg" class="gallery__link">
+              <img src="images/products/ethnic-wear/anarkali-black-embroidered-jacket.jpg" alt="Black Anarkali with Embroidered Jacket by PSR Garments" loading="lazy" width="667" height="1000">
+              <figcaption><strong>Black Anarkali with Embroidered Jacket</strong><span>Ethnic Wear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="ethnic">
+            <a href="images/products/ethnic-wear/gown-pink-printed-pleated.jpg" class="gallery__link">
+              <img src="images/products/ethnic-wear/gown-pink-printed-pleated.jpg" alt="Pink Printed Pleated Gown by PSR Garments" loading="lazy" width="564" height="1000">
+              <figcaption><strong>Pink Printed Pleated Gown</strong><span>Ethnic Wear</span></figcaption>
+            </a>
+          </figure>
+          <figure class="gallery__item" data-category="ethnic">
+            <a href="images/products/ethnic-wear/kaftan-mustard-embroidered.jpg" class="gallery__link">
+              <img src="images/products/ethnic-wear/kaftan-mustard-embroidered.jpg" alt="Mustard Embroidered Kaftan Dress by PSR Garments" loading="lazy" width="667" height="1000">
+              <figcaption><strong>Mustard Embroidered Kaftan Dress</strong><span>Ethnic Wear</span></figcaption>
+            </a>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox for gallery photos -->
+    <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+      <button type="button" class="lightbox__close" data-lb="close" aria-label="Close">&times;</button>
+      <button type="button" class="lightbox__nav lightbox__nav--prev" data-lb="prev" aria-label="Previous photo">&#8249;</button>
+      <figure class="lightbox__figure">
+        <img class="lightbox__img" src="" alt="">
+        <figcaption class="lightbox__caption"></figcaption>
+      </figure>
+      <button type="button" class="lightbox__nav lightbox__nav--next" data-lb="next" aria-label="Next photo">&#8250;</button>
+      <a href="#wholesale" class="btn btn--primary btn--sm lightbox__enquire" data-lb="enquire">Enquire about this design</a>
+    </dialog>
 
     <!-- ============ WHY CHOOSE US ============ -->
     <section class="section" id="why-us">
@@ -390,7 +599,9 @@
                 <option value="">Select a product</option>
                 <option>Ladies' Inskirts</option>
                 <option>Ladies' Nightwear</option>
-                <option>Both Inskirts &amp; Nightwear</option>
+                <option>Ladies' Kurtis</option>
+                <option>Ethnic Gowns &amp; Anarkalis</option>
+                <option>Multiple products</option>
                 <option>Other ladies' garments</option>
               </select>
             </div>
@@ -547,7 +758,9 @@
         <ul class="footer__links">
           <li><a href="#products">Ladies' Inskirts</a></li>
           <li><a href="#products">Ladies' Nightwear</a></li>
-          <li><a href="#products">Other Ladies' Garments</a></li>
+          <li><a href="#products">Ladies' Kurtis</a></li>
+          <li><a href="#products">Ethnic Gowns &amp; Anarkalis</a></li>
+          <li><a href="#gallery">Design Gallery</a></li>
         </ul>
       </div>
       <div>
