@@ -624,26 +624,46 @@
           </div>
         </div>
 
+        <!--
+          Enquiries from this form and the contact form are emailed via Web3Forms.
+          The access key (which decides the receiving email) is set at the top of js/main.js.
+        -->
         <form class="form-card" id="wholesaleForm" novalidate>
           <h3 class="form-card__title">Wholesale Enquiry Form</h3>
-          <p class="form-card__sub">Fill in the details below. Your enquiry will be sent to us on WhatsApp.</p>
+          <p class="form-card__sub">Fill in the details below and our team will get back to you within one working day. Fields marked <span class="req">*</span> are required.</p>
+
+          <input type="hidden" name="subject" value="New Wholesale Enquiry – PSR Garments Website">
+          <input type="hidden" name="Form" value="Wholesale Enquiry">
+          <!-- Spam trap: hidden from people, bots fill it in -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="w-honey">Leave this field empty</label>
+            <input type="text" id="w-honey" name="botcheck" tabindex="-1" autocomplete="off">
+          </div>
 
           <div class="form-grid">
             <div class="field">
               <label for="w-name">Your Name <span class="req">*</span></label>
-              <input type="text" id="w-name" name="name" autocomplete="name" required>
+              <input type="text" id="w-name" name="Name" autocomplete="name" minlength="2" maxlength="60" required>
             </div>
             <div class="field">
               <label for="w-company">Company / Shop Name <span class="req">*</span></label>
-              <input type="text" id="w-company" name="company" autocomplete="organization" required>
+              <input type="text" id="w-company" name="Company" autocomplete="organization" minlength="2" maxlength="80" required>
             </div>
             <div class="field">
               <label for="w-phone">Phone Number <span class="req">*</span></label>
-              <input type="tel" id="w-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required>
+              <input type="tel" id="w-phone" name="Phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" maxlength="16" required>
+            </div>
+            <div class="field">
+              <label for="w-email">Email Address</label>
+              <input type="email" id="w-email" name="email" autocomplete="email" placeholder="you@example.com" maxlength="80">
+            </div>
+            <div class="field">
+              <label for="w-location">City / Delivery Location <span class="req">*</span></label>
+              <input type="text" id="w-location" name="Location" autocomplete="address-level2" placeholder="e.g. Bengaluru, Karnataka" minlength="2" maxlength="80" required>
             </div>
             <div class="field">
               <label for="w-product">Product Requirement <span class="req">*</span></label>
-              <select id="w-product" name="product" required>
+              <select id="w-product" name="Product" required>
                 <option value="">Select a product</option>
                 <option>Ladies' Inskirts</option>
                 <option>Ladies' Nightwear</option>
@@ -655,15 +675,15 @@
             </div>
             <div class="field field--full">
               <label for="w-qty">Quantity Required <span class="req">*</span></label>
-              <input type="text" id="w-qty" name="quantity" placeholder="e.g. 500 pieces / 50 dozen" required>
+              <input type="text" id="w-qty" name="Quantity" placeholder="e.g. 500 pieces / 50 dozen" maxlength="60" data-rule="quantity" required>
             </div>
             <div class="field field--full">
               <label for="w-message">Message / Specifications</label>
-              <textarea id="w-message" name="message" rows="4" placeholder="Sizes, colours, fabric preference, delivery location, etc."></textarea>
+              <textarea id="w-message" name="Message" rows="4" maxlength="1000" placeholder="Sizes, colours, fabric preference, design names, delivery timeline, etc."></textarea>
             </div>
           </div>
 
-          <p class="form-status" role="status" aria-live="polite"></p>
+          <div class="form-status" role="status" aria-live="polite"></div>
           <button type="submit" class="btn btn--primary btn--block btn--lg">Send Wholesale Enquiry</button>
         </form>
       </div>
@@ -741,22 +761,33 @@
             <h3 class="form-card__title">Send Us a Message</h3>
             <p class="form-card__sub">We usually respond within one working day.</p>
 
+            <input type="hidden" name="subject" value="New Contact Message – PSR Garments Website">
+            <input type="hidden" name="Form" value="Contact Us">
+            <div class="hp-field" aria-hidden="true">
+              <label for="c-honey">Leave this field empty</label>
+              <input type="text" id="c-honey" name="botcheck" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="form-grid">
               <div class="field field--full">
                 <label for="c-name">Your Name <span class="req">*</span></label>
-                <input type="text" id="c-name" name="name" autocomplete="name" required>
+                <input type="text" id="c-name" name="Name" autocomplete="name" minlength="2" maxlength="60" required>
               </div>
               <div class="field field--full">
                 <label for="c-phone">Phone Number <span class="req">*</span></label>
-                <input type="tel" id="c-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required>
+                <input type="tel" id="c-phone" name="Phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" maxlength="16" required>
+              </div>
+              <div class="field field--full">
+                <label for="c-email">Email Address</label>
+                <input type="email" id="c-email" name="email" autocomplete="email" placeholder="you@example.com" maxlength="80">
               </div>
               <div class="field field--full">
                 <label for="c-message">Message <span class="req">*</span></label>
-                <textarea id="c-message" name="message" rows="5" required></textarea>
+                <textarea id="c-message" name="Message" rows="5" minlength="10" maxlength="1000" required></textarea>
               </div>
             </div>
 
-            <p class="form-status" role="status" aria-live="polite"></p>
+            <div class="form-status" role="status" aria-live="polite"></div>
             <button type="submit" class="btn btn--primary btn--block">Send Message</button>
           </form>
         </div>

@@ -2,8 +2,14 @@
 (function () {
   'use strict';
 
-  // WhatsApp number that receives enquiries (country code + number, digits only)
+  // WhatsApp number used for the WhatsApp buttons / fallback (country code + number, digits only)
   var WHATSAPP_NUMBER = '919490000123';
+
+  // ===== Enquiry email settings (Web3Forms) =====
+  // Get a free access key at https://web3forms.com by entering the email address that
+  // should RECEIVE enquiries (bharath79966@gmail.com). Paste the key below.
+  var WEB3FORMS_ACCESS_KEY = '7df4dfca-3d36-4626-b5a9-5f0be95bae1e';
+  var WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
   var header = document.getElementById('header');
   var nav = document.getElementById('nav');
@@ -159,9 +165,20 @@
     });
   }
 
-  // ---------- Forms → WhatsApp ----------
+  // ---------- Enquiry forms → email (via Web3Forms) ----------
+  var MESSAGES = {
+    required: 'This field is required.',
+    name: 'Please enter at least 2 letters.',
+    phone: 'Please enter a valid 10-digit mobile number.',
+    email: 'Please enter a valid email address (e.g. name@example.com).',
+    quantity: 'Please include a number, e.g. 500 pieces.',
+    tooShort: 'Please enter at least {n} characters.',
+    tooLong: 'Please keep this under {n} characters.'
+  };
+
   function setError(field, message) {
     var wrap = field.closest('.field');
+    if (!wrap) return;
     var existing = wrap.querySelector('.field__error');
     if (existing) existing.remove();
     wrap.classList.toggle('has-error', !!message);
@@ -169,22 +186,42 @@
     if (message) {
       var el = document.createElement('span');
       el.className = 'field__error';
+      el.id = field.id + '-error';
       el.textContent = message;
       wrap.appendChild(el);
+      field.setAttribute('aria-describedby', el.id);
+    } else {
+      field.removeAttribute('aria-describedby');
     }
+  }
+
+  function normalisePhone(value) {
+    return value.replace(/\D/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
+  }
+
+  function checkField(field) {
+    var value = field.value.trim();
+    if (!value) return field.required ? MESSAGES.required : '';
+
+    if (field.type === 'tel' && !/^[6-9]\d{9}$/.test(normalisePhone(value))) return MESSAGES.phone;
+    if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(value)) return MESSAGES.email;
+    if (field.autocomplete === 'name' && !/\p{L}.*\p{L}/u.test(value)) return MESSAGES.name;
+    if (field.getAttribute('data-rule') === 'quantity' && !/\d/.test(value)) return MESSAGES.quantity;
+    if (field.minLength > 0 && value.length < field.minLength) return MESSAGES.tooShort.replace('{n}', field.minLength);
+    if (field.maxLength > 0 && value.length > field.maxLength) return MESSAGES.tooLong.replace('{n}', field.maxLength);
+    return '';
+  }
+
+  function userFields(form) {
+    return Array.prototype.filter.call(form.elements, function (el) {
+      return el.closest('.field') && /^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName);
+    });
   }
 
   function validate(form) {
     var firstInvalid = null;
-    form.querySelectorAll('input, select, textarea').forEach(function (field) {
-      var value = field.value.trim();
-      var message = '';
-      if (field.required && !value) {
-        message = 'This field is required.';
-      } else if (field.type === 'tel' && value) {
-        var digits = value.replace(/\D/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
-        if (!/^[6-9]\d{9}$/.test(digits)) message = 'Please enter a valid 10-digit mobile number.';
-      }
+    userFields(form).forEach(function (field) {
+      var message = checkField(field);
       setError(field, message);
       if (message && !firstInvalid) firstInvalid = field;
     });
@@ -192,55 +229,180 @@
     return !firstInvalid;
   }
 
-  function sendToWhatsApp(title, rows) {
-    var text = '*' + title + '*\n\n' + rows
-      .filter(function (r) { return r[1]; })
-      .map(function (r) { return r[0] + ': ' + r[1]; })
-      .join('\n');
-    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  function collect(form) {
+    var data = {};
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el.type === 'submit') return;
+      data[el.name] = el.value.trim();
+    });
+    if (data.Phone) data.Phone = '+91 ' + normalisePhone(data.Phone);
+    if (!data.email) delete data.email; // Web3Forms uses "email" as the reply-to address
+    data.from_name = 'PSR Garments Website';
+    data['Submitted on'] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    data['Page'] = window.location.href.split('#')[0];
+    return data;
   }
 
-  function bindForm(id, title, fields) {
+  function whatsappLink(data) {
+    var skip = /^(_|subject$|from_name$|botcheck$|access_key$|Page$|Submitted on$)/;
+    var text = '*' + (data.Form || 'Enquiry') + ' – PSR Garments*\n\n' + Object.keys(data)
+      .filter(function (k) { return !skip.test(k) && k !== 'Form' && data[k]; })
+      .map(function (k) { return (k === 'email' ? 'Email' : k) + ': ' + data[k]; })
+      .join('\n');
+    return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
+  }
+
+  function showStatus(status, type, html) {
+    status.className = 'form-status is-' + type;
+    status.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  var SUCCESS_HTML = function (name) {
+    var firstName = (name || '').split(' ')[0];
+    return '<strong>Thank you' + (firstName ? ', ' + escapeHtml(firstName) : '') + '!</strong> ' +
+      'Your enquiry has been sent successfully. Our team will contact you within one working day.';
+  };
+
+  // Plain (non-AJAX) POST to Web3Forms; it redirects back here with ?enquiry=sent
+  function submitNatively(data, formId) {
+    var back = window.location.origin + window.location.pathname + '?enquiry=sent&form=' + formId + '#' + formId;
+    var fallback = document.createElement('form');
+    fallback.method = 'POST';
+    fallback.action = WEB3FORMS_ENDPOINT;
+    fallback.style.display = 'none';
+    var payload = Object.assign({}, data, { redirect: back });
+    Object.keys(payload).forEach(function (key) {
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = payload[key];
+      fallback.appendChild(input);
+    });
+    document.body.appendChild(fallback);
+    HTMLFormElement.prototype.submit.call(fallback);
+  }
+
+  // Show the thank-you message after returning from a plain POST
+  (function showReturnedSuccess() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('enquiry') !== 'sent') return;
+    var form = document.getElementById(params.get('form'));
+    var status = form && form.querySelector('.form-status');
+    if (status) showStatus(status, 'success', SUCCESS_HTML(''));
+    if (window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
+  })();
+
+  function bindForm(id) {
     var form = document.getElementById(id);
     if (!form) return;
     var status = form.querySelector('.form-status');
+    var button = form.querySelector('button[type="submit"]');
+    var buttonText = button.textContent;
+    var sending = false;
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      status.className = 'form-status';
+      if (sending) return;
+
       if (!validate(form)) {
-        status.textContent = 'Please correct the highlighted fields.';
-        status.classList.add('is-error');
+        showStatus(status, 'error', 'Please correct the highlighted fields.');
         return;
       }
-      var rows = fields.map(function (f) {
-        return [f[1], form.elements[f[0]].value.trim()];
-      });
-      sendToWhatsApp(title, rows);
-      status.textContent = 'Thank you! WhatsApp has opened with your enquiry – please press Send to deliver it.';
-      status.classList.add('is-success');
-      form.reset();
+
+      var data = collect(form);
+
+      // Bot filled the hidden trap field: pretend success, send nothing.
+      if (data.botcheck) {
+        form.reset();
+        showStatus(status, 'success', 'Thank you! Your enquiry has been sent.');
+        return;
+      }
+      delete data.botcheck;
+
+      if (!/^[0-9a-f-]{36}$/i.test(WEB3FORMS_ACCESS_KEY)) {
+        if (window.console) console.error('Enquiry form: WEB3FORMS_ACCESS_KEY is not set in js/main.js');
+        showStatus(status, 'error',
+          'Online enquiries are not set up yet. Please <a href="' + whatsappLink(data) + '" target="_blank" rel="noopener">send your enquiry on WhatsApp</a> ' +
+          'or call <a href="tel:+919490000123">94900 00123</a>.');
+        return;
+      }
+      data.access_key = WEB3FORMS_ACCESS_KEY;
+
+      sending = true;
+      button.disabled = true;
+      button.classList.add('is-loading');
+      button.textContent = 'Sending…';
+      showStatus(status, 'info', 'Sending your enquiry, please wait…');
+
+      var controller = 'AbortController' in window ? new AbortController() : null;
+      var timer = controller && setTimeout(function () { controller.abort(); }, 20000);
+
+      fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+        signal: controller ? controller.signal : undefined
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            if (!res.ok || String(body.success) !== 'true') {
+              throw new Error(body.message || ('HTTP ' + res.status));
+            }
+          });
+        })
+        .then(function () {
+          form.reset();
+          showStatus(status, 'success', SUCCESS_HTML(data.Name));
+        })
+        .catch(function (err) {
+          var reason = (err && err.message) || '';
+          if (window.console) console.warn('Enquiry form error:', reason);
+
+          // The background request could not reach the server (network/browser restriction):
+          // fall back to a normal form POST, which Web3Forms redirects back to this page.
+          if (err && err.name === 'TypeError' && /^https?:$/.test(window.location.protocol)) {
+            showStatus(status, 'info', 'Sending your enquiry, please wait…');
+            submitNatively(data, id);
+            return;
+          }
+
+          var hint = '';
+          if (window.location.protocol === 'file:') {
+            hint = '<br><em>Note: please test the form on the live website (or a local web server), not a file opened directly on this computer.</em>';
+          }
+          showStatus(status, 'error',
+            'Sorry, we could not send your enquiry right now. Please try again, or ' +
+            '<a href="' + whatsappLink(data) + '" target="_blank" rel="noopener">send it on WhatsApp</a> / ' +
+            'call <a href="tel:+919490000123">94900 00123</a>.' + hint);
+        })
+        .then(function () {
+          if (timer) clearTimeout(timer);
+          sending = false;
+          button.disabled = false;
+          button.classList.remove('is-loading');
+          button.textContent = buttonText;
+        });
     });
 
+    // Re-check a field when the visitor leaves it or corrects it
+    form.addEventListener('focusout', function (e) {
+      if (e.target.closest('.field') && e.target.value.trim()) setError(e.target, checkField(e.target));
+    });
     form.addEventListener('input', function (e) {
-      if (e.target.closest('.field.has-error')) setError(e.target, '');
+      if (e.target.closest('.field.has-error')) setError(e.target, checkField(e.target));
     });
   }
 
-  bindForm('wholesaleForm', 'Wholesale Enquiry – PSR Garments', [
-    ['name', 'Name'],
-    ['company', 'Company'],
-    ['phone', 'Phone'],
-    ['product', 'Product'],
-    ['quantity', 'Quantity'],
-    ['message', 'Message']
-  ]);
-
-  bindForm('contactForm', 'Website Enquiry – PSR Garments', [
-    ['name', 'Name'],
-    ['phone', 'Phone'],
-    ['message', 'Message']
-  ]);
+  bindForm('wholesaleForm');
+  bindForm('contactForm');
 
   // ---------- Footer year ----------
   var year = document.getElementById('year');

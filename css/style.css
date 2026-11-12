@@ -398,6 +398,15 @@ svg { width: 1em; height: 1em; fill: currentColor; flex-shrink: 0; }
 .form-status { min-height: 1.2em; font-size: .9rem; margin: 0 0 .8rem; }
 .form-status.is-error { color: #c62828; }
 .form-status.is-success { color: #1b7a3d; }
+.form-status:not(:empty) { padding: .75rem .9rem; border-radius: var(--radius-sm); line-height: 1.5; }
+.form-status.is-success { background: #e8f5ec; border: 1px solid #b7dfc3; }
+.form-status.is-error { background: #fdecec; border: 1px solid #f3c2c2; }
+.form-status.is-info { color: var(--navy); background: var(--cream); border: 1px solid var(--line); }
+.form-status a { font-weight: 600; text-decoration: underline; }
+.btn.is-loading { opacity: .75; cursor: progress; transform: none; }
+.btn:disabled { pointer-events: none; }
+/* Spam-trap field: visually hidden but present for bots */
+.hp-field { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ---------- Contact ---------- */
 .contact { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
